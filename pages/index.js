@@ -1,13 +1,14 @@
-import { useAuth } from "lib/auth";
+import { useAuth } from "@/lib/auth";
+import { Button } from "@chakra-ui/react";
 
 export default function Home() {
   const { user, signInWithGoogle, signOut } = useAuth();
   return (
     <div>
       {user ? (
-        <button onClick={signOut}>SignOut</button>
+        <Button onClick={signOut}>SignOut</Button>
       ) : (
-        <button onClick={signInWithGoogle}>SignInWithGoogle</button>
+        <Button onClick={signInWithGoogle}>SignInWithGoogle</Button>
       )}
     </div>
   );

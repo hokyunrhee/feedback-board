@@ -1,0 +1,10 @@
+{
+    "editor.codeActionsOnSave": { 
+        "source.fixAll.eslint": true 
+    },
+    "files.autoSave": "onFocusChange",
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+    }
+}

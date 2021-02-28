@@ -1,8 +1,9 @@
 import { useAuth } from "lib/auth";
-import { Button, Flex } from "@chakra-ui/react";
-import { createSite } from "@/lib/db";
+import { Flex } from "@chakra-ui/react";
 
-export default function Home() {
+import { getAllFeedback, getSite } from "@/lib/db-admin";
+
+export default function Home({ allFeedback, site }) {
   const { user, signInWithGoogle, signOut } = useAuth();
   return (
     <Flex
@@ -11,16 +12,20 @@ export default function Home() {
       align="center"
       justify="center"
       h="100vh"
-    >
-      {user ? (
-        <Button as="a" href="/dashboard">
-          View Dashboard
-        </Button>
-      ) : (
-        <Button mt={4} size="sm" onClick={() => createSite({ test: 1 })}>
-          Sign In
-        </Button>
-      )}
-    </Flex>
+    ></Flex>
   );
+}
+
+export async function getStaticProps(context) {
+  const SITE_ID = "1234";
+
+  const { feedback } = await getAllFeedback(SITE_ID);
+  const { site } = await getSite(SITE_ID);
+  return {
+    props: {
+      allFeedback: feedback,
+      site,
+    },
+    revalidate: 1,
+  };
 }

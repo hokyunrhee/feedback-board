@@ -1,10 +1,14 @@
 import React from "react";
 import NextLink from "next/link";
 import { Box, Link } from "@chakra-ui/react";
-// import { parseISO, format } from 'date-fns'
+import dayjs from "dayjs";
 import { Table, Tr, Th, Td } from "./Table";
 
 const SiteTable = ({ sites }) => {
+  const formatDate = (seconds) => {
+    return dayjs.unix(seconds).format("YYYY/MM/DD");
+  };
+
   return (
     <Box overflowX="scroll">
       <Table w="full">
@@ -33,7 +37,7 @@ const SiteTable = ({ sites }) => {
                   </Link>
                 </NextLink>
               </Td>
-              {/* <Td>{format(parseISO(site.createdAt), "PPpp")}</Td> */}
+              <Td>{formatDate(site.createdAt._seconds)}</Td>
             </Box>
           ))}
         </tbody>

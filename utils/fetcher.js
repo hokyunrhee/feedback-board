@@ -8,3 +8,11 @@ export const getSites = async (token) => {
   });
   return data;
 };
+
+export const getFeedback = async (token) => {
+  await axios.post("/api/feedback", {
+    headers: {
+      Authorization: token,
+    },
+  });
+};

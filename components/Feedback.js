@@ -13,4 +13,5 @@ const Feedback = ({ author, text, createdAt }) => (
     <Divider borderColor="gray.200" backgroundColor="gray.200" mt={8} mb={8} />
   </Box>
 );
+
 export default Feedback;

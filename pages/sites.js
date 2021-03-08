@@ -5,9 +5,11 @@ import EmptyState from "@/components/EmptyState";
 import SiteTable from "@/components/SiteTable";
 import SiteTableSkeleton from "@/components/SiteTableSkeleton";
 import { getSites } from "@/utils/fetcher";
+import { useAuth } from "@/lib/auth";
 
 const Dashboard = () => {
-  const { data } = useQuery(["sites"], getSites);
+  const { user } = useAuth();
+  const { data } = useQuery(["sites"], () => getSites(user.token));
   const sites = data?.sites;
 
   if (!data) {

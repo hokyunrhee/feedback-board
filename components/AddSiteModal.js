@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
-import { mutate } from "swr";
+import { useQueryClient } from "react-query";
 import {
   Modal,
   ModalOverlay,
@@ -27,7 +26,9 @@ const AddSiteModal = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { handleSubmit, register } = useForm();
 
-  const onCreateSite = ({ name, url }) => {
+  const queryClient = useQueryClient();
+
+  const onCreateSite = async ({ name, url }) => {
     const newSite = {
       authorId: auth.user.uid,
       createdAt: serverTimestamp(),
@@ -40,7 +41,9 @@ const AddSiteModal = ({ children }) => {
       },
     };
 
-    const { id } = createSite(newSite);
+    await createSite(newSite);
+    await queryClient.invalidateQueries(["sites"]);
+
     toast({
       title: "Success!",
       description: "We've added your site.",
@@ -48,13 +51,7 @@ const AddSiteModal = ({ children }) => {
       duration: 5000,
       isClosable: true,
     });
-    // mutate(
-    //   ["/api/sites", auth.user.token],
-    //   async (data) => ({
-    //     sites: [{ id, ...newSite }, ...data.sites],
-    //   }),
-    //   false
-    // );
+
     onClose();
   };
 

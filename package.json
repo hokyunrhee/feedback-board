@@ -16,6 +16,7 @@
     "firebase": "^8.2.9",
     "firebase-admin": "^9.5.0",
     "framer-motion": "^3.7.0",
+    "iframe-resizer": "^4.3.1",
     "next": "10.0.7",
     "react": "17.0.1",
     "react-dom": "17.0.1",
